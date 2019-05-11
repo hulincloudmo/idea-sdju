@@ -1,48 +1,61 @@
 package com.imooc.pojo;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Table;
 
+/**
+ * @author hulincloud
+ */
 @Table(name = "my_users")
 public class MyUsers {
+    @ApiModelProperty(hidden = true)
     private String id;
 
     /**
      * 用户名
      */
+
     private String username;
 
     /**
      * 密码
      */
+    @ApiModelProperty(hidden = true)
     private String password;
 
     /**
      * 我的头像，如果没有默认给一张
      */
+    @ApiModelProperty(hidden = true)
     @Column(name = "face_image")
     private String faceImage;
 
     /**
      * 昵称
      */
+    @ApiModelProperty(hidden = true)
     private String nickname;
 
     /**
      * 我的粉丝数量
      */
+    @ApiModelProperty(hidden = true)
     @Column(name = "fans_counts")
     private Integer fansCounts;
 
     /**
      * 我关注的人总数
      */
+    @ApiModelProperty(hidden = true)
     @Column(name = "follow_counts")
     private Integer followCounts;
 
     /**
      * 我接受到的赞美/收藏 的数量
      */
+    @ApiModelProperty(hidden = true)
     @Column(name = "receive_like_counts")
     private Integer receiveLikeCounts;
 
