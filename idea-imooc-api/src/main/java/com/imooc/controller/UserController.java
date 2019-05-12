@@ -1,5 +1,6 @@
 package com.imooc.controller;
 
+import com.imooc.pojo.MyUsers;
 import com.imooc.service.UserService;
 import com.imooc.utils.IMoocJSONResult;
 import io.swagger.annotations.Api;
@@ -80,7 +81,10 @@ public class UserController extends BasicController {
 				fileOutputStream.close();
 			}
 		}
-
+		MyUsers user = new MyUsers();
+		user.setId(userId);
+		user.setFaceImage(uploadPathDB);
+		userService.updateUserInfo(user);
 
 		return IMoocJSONResult.ok(uploadPathDB);
 	}
