@@ -22,7 +22,7 @@ public class MyUsers {
     /**
      * 密码
      */
-    @ApiModelProperty(hidden = true)
+
     private String password;
 
     /**
