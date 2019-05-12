@@ -55,7 +55,7 @@ public class Swagger2 {
                 // 设置页面标题
                 .title("使用swagger2构建Sdju科研管理系统后端api接口文档")
                 // 设置联系人
-                .contact(new Contact("hulincloud", "http://www.api.hangmomo.cn", "305562638@qq.com"))
+                .contact(new Contact("hulincloud", "https://www.api.hangmomo.cn", "305562638@qq.com"))
                 // 描述
                 .description("欢迎访问Sdju科研管理系统接口文档")
                 // 定义版本号
