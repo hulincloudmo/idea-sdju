@@ -15,7 +15,7 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
+    @Autowired(required = false)
     private MyUsersMapper usersMapper;
 
     @Autowired
@@ -62,13 +62,13 @@ public class UserServiceImpl implements UserService {
         return users;
 
     }
-    @Transactional(propagation = Propagation.REQUIRED)
+
     @Override
     public void updateUserInfo(MyUsers user) {
-
         Example userExample = new Example(MyUsers.class);
         Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("id", user.getId());
         usersMapper.updateByExampleSelective(user, userExample);
     }
+
 }

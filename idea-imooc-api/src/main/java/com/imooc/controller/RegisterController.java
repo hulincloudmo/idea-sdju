@@ -80,7 +80,6 @@ public class RegisterController extends BasicController {
 			dataType="String", paramType="query")
 	@PostMapping("/logout")
 	public IMoocJSONResult logout(String userId) {
-
 		redis.del(USER_REDIS_SESSION + ":" +userId);
 		return IMoocJSONResult.ok();
 	}

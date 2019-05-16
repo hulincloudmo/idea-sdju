@@ -43,6 +43,8 @@ public class UserController extends BasicController {
 			return IMoocJSONResult.errorMsg("用户id不能为空...");
 		}
 
+
+
 		// 文件保存的命名空间
 		String fileSpace = "D:\\SDJU_research_userData";
 		// 保存到数据库中的相对路径
@@ -86,9 +88,13 @@ public class UserController extends BasicController {
 		MyUsers user = new MyUsers();
 		user.setId(userId);
 		user.setFaceImage(uploadPathDB);
-		userService.updateUserInfo(user);
 
-		return IMoocJSONResult.ok();
+
+			userService.updateUserInfo(user);
+
+
+
+		return IMoocJSONResult.ok(user);
 	}
 	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口")
 	@ApiImplicitParam(name="userId", value="用户id", required=true,

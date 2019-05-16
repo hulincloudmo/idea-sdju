@@ -21,7 +21,9 @@ public interface UserService {
     public MyUsers queryUserInfo(String user);
 
     /**
-     * 用户修改信息
+     *  用户修改信息
+     *
      * **/
     public void updateUserInfo(MyUsers user);
+
 }
