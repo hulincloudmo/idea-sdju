@@ -51,6 +51,18 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public MyUsers queryUserInfo(String userId) {
+
+        Example userExample = new Example(MyUsers.class);
+        Criteria criteria = userExample.createCriteria();
+        criteria.andEqualTo("id", userId);
+        MyUsers users = usersMapper.selectOneByExample(userExample);
+        return users;
+
+    }
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public void updateUserInfo(MyUsers user) {
 
@@ -58,7 +70,5 @@ public class UserServiceImpl implements UserService {
         Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("id", user.getId());
         usersMapper.updateByExampleSelective(user, userExample);
-
-
     }
 }

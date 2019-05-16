@@ -17,6 +17,11 @@ public interface UserService {
     //用户登录
     public MyUsers queryUserForLogin(String username, String password);
 
-    /**用户修改信息*/
+    /**用户查询信息*/
+    public MyUsers queryUserInfo(String user);
+
+    /**
+     * 用户修改信息
+     * **/
     public void updateUserInfo(MyUsers user);
 }
