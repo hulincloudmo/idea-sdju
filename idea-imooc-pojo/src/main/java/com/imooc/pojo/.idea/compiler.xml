@@ -8,11 +8,19 @@
         <outputRelativeToContentRoot value="true" />
         <module name="idea-imooc-service" />
         <module name="idea-imooc-pojo" />
-        <module name="idea-imooc-api" />
-        <module name="idea-imooc-mapper" />
         <module name="idea-imooc-common" />
+        <module name="idea-imooc-mapper" />
+        <module name="idea-imooc-api" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="idea-imooc" target="1.8" />
+      <module name="idea-imooc-api" target="1.8" />
+      <module name="idea-imooc-common" target="1.8" />
+      <module name="idea-imooc-mapper" target="1.8" />
+      <module name="idea-imooc-pojo" target="1.8" />
+      <module name="idea-imooc-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">

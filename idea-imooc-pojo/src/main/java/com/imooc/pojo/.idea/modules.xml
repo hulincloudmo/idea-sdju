@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../../idea-imooc.iml" filepath="$PROJECT_DIR$/../../../../../../../idea-imooc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../../idea-imooc-api/idea-imooc-api.iml" filepath="$PROJECT_DIR$/../../../../../../../idea-imooc-api/idea-imooc-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../../idea-imooc-common/idea-imooc-common.iml" filepath="$PROJECT_DIR$/../../../../../../../idea-imooc-common/idea-imooc-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../../idea-imooc-mapper/idea-imooc-mapper.iml" filepath="$PROJECT_DIR$/../../../../../../../idea-imooc-mapper/idea-imooc-mapper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../idea-imooc-pojo.iml" filepath="$PROJECT_DIR$/../../../../../../idea-imooc-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../../../../../idea-imooc-service/idea-imooc-service.iml" filepath="$PROJECT_DIR$/../../../../../../../idea-imooc-service/idea-imooc-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/pojo.iml" filepath="$PROJECT_DIR$/.idea/pojo.iml" />
+    </modules>
+  </component>
+</project>

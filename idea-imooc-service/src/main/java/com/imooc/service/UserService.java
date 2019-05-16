@@ -3,6 +3,13 @@ package com.imooc.service;
 import com.imooc.pojo.MyUsers;
 
 public interface UserService {
+    /**
+     * fetch data by rule id
+     *
+     * @param  username rule id
+     *
+     * @return Result<XxxxDO>
+     */
     public boolean queryUsernameIsExist(String username);
 
     public void saveUser(MyUsers users);
