@@ -1,6 +1,7 @@
-package com.imooc.service;
+package com.imooc.service.impl;
 
 import com.imooc.pojo.MyUsers;
+import com.imooc.service.UserService;
 import mapper.MyUsersMapper;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import tk.mybatis.mapper.entity.Example.Criteria;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired(required = false)
+    @Autowired
     private MyUsersMapper usersMapper;
 
     @Autowired
