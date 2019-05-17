@@ -4,6 +4,7 @@ import com.imooc.pojo.Bgm;
 import com.imooc.service.BgmService;
 import mapper.BgmMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import java.util.List;
  * @Date: 2019/5/17 10:56
  * @Version: 1.0
  */
+@Service
 public class BgmServiceImpl implements BgmService {
 
     @Autowired
@@ -23,6 +25,6 @@ public class BgmServiceImpl implements BgmService {
 
     @Override
     public List<Bgm> queryBgmList() {
-        return null;
+        return bgmMapper.selectAll();
     }
 }
