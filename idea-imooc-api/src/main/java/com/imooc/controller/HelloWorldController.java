@@ -1,6 +1,6 @@
 package com.imooc.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,9 +12,9 @@ public class HelloWorldController {
 
 
 	
-	@RequestMapping("/hello")
-	public String Hello() {
-		return "Hello Spring Boot~ in idea";
+	@PostMapping("/basic")
+	public String basic() {
+		return "这是复制用的";
 	}
 	
 }

@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class UsersVO {
     
     private String id;
-	
+
+
 	private String userToken;
 	
 	private boolean isFollow;

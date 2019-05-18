@@ -1,12 +1,9 @@
 package com.imooc;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.github.xiaoymin.swaggerbootstrapui.annotations.EnableSwaggerBootstrapUI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
@@ -19,8 +16,12 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Configuration
 @EnableSwagger2
+@EnableSwaggerBootstrapUI
 public class Swagger2 {
     /**
      * @Description:swagger2的配置文件，这里可以配置swagger2的一些基本的内容，比如扫描的包等等
@@ -53,9 +54,9 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 设置页面标题
-                .title("使用swagger2构建Sdju科研管理系统后端api接口文档")
+                .title("Sdju科研管理系统后端api接口文档")
                 // 设置联系人
-                .contact(new Contact("hulincloud", "https://www.api.hangmomo.cn", "305562638@qq.com"))
+                .contact(new Contact("hulincloud", "https://www.api.hangmomo.cn/doc.html", "305562638@qq.com"))
                 // 描述
                 .description("欢迎访问Sdju科研管理系统接口文档")
                 // 定义版本号

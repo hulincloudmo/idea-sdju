@@ -1,13 +1,10 @@
 package com.imooc.controller;
 
-import com.imooc.pojo.MyUsers;
-import com.imooc.pojo.vo.UsersVO;
 import com.imooc.service.UserService;
 import com.imooc.utils.HulincloudJSONResult;
 import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,21 +19,37 @@ import java.io.InputStream;
  * @author hulincloud
  */
 @RestController
-@Api(value = "用户相关业务接口", tags = {"用户操作controller"})
-@RequestMapping("/user")
-public class UserController extends BasicController {
+@Api(value = "视频相关接口", tags = {"视频controller"})
+@RequestMapping("/video")
+public class VideoController {
 
 	@Autowired
 	private UserService userService;
 
-	@ApiOperation(value="用户上传头像", notes="用户上传头像的接口")
+	@ApiOperation(value="用户上传视频", notes="用户上传视频的接口")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name="userId", value="用户id", required=true,
-					dataType="String", paramType="query")
+					dataType="String", paramType="form"),
+			@ApiImplicitParam(name="bgmId", value="背景音乐id", required=false,
+					dataType="String", paramType="form"),
+			@ApiImplicitParam(name="videoSeconds", value="背景音乐播放长度", required=true,
+					dataType="String", paramType="form"),
+			@ApiImplicitParam(name="videoWidth", value="视频宽度", required=true,
+					dataType="String", paramType="form"),
+			@ApiImplicitParam(name="videoHeight", value="视频高度", required=true,
+					dataType="String", paramType="form"),
+			@ApiImplicitParam(name="desc", value="视频描述", required=false,
+					dataType="String", paramType="form")
 	})
-	@PostMapping(value = "/uploadFace", headers = "content-type=multipart/from-data")
-	public HulincloudJSONResult uploadFace(String userId,
-										   @ApiParam(value = "头像", required = true) MultipartFile[] files) throws Exception {
+
+
+	@PostMapping(value="/upload", headers="content-type=multipart/form-data")
+	public HulincloudJSONResult upload(String userId,
+									   String bgmId, double videoSeconds,
+									   int videoWidth, int videoHeight,
+									   String desc,
+									   @ApiParam(value="短视频", required=true)
+												   MultipartFile file) throws Exception {
 
 		if (StringUtils.isBlank(userId)) {
 			return HulincloudJSONResult.errorMsg("用户id不能为空...");
@@ -47,28 +60,28 @@ public class UserController extends BasicController {
 		// 文件保存的命名空间
 		String fileSpace = "D:\\SDJU_research_userData";
 		// 保存到数据库中的相对路径
-		String uploadPathDB = "/" + userId + "/face";
+		String uploadPathDB = "/" + userId + "/video";
 
 		FileOutputStream fileOutputStream = null;
 		InputStream inputStream = null;
 		try {
-			if (files != null && files.length > 0) {
+			if (file != null ) {
 
-				String fileName = files[0].getOriginalFilename();
+				String fileName = file.getOriginalFilename();
 				if (StringUtils.isNotBlank(fileName)) {
 					// 文件上传的最终保存路径
-					String finalFacePath = fileSpace + uploadPathDB + "/" + fileName;
+					String finalVideoPath = fileSpace + uploadPathDB + "/" + fileName;
 					// 设置数据库保存的路径
 					uploadPathDB += ("/" + fileName);
 
-					File outFile = new File(finalFacePath);
+					File outFile = new File(finalVideoPath);
 					if (outFile.getParentFile() != null || !outFile.getParentFile().isDirectory()) {
 						// 创建父文件夹
 						outFile.getParentFile().mkdirs();
 					}
 
 					fileOutputStream = new FileOutputStream(outFile);
-					inputStream = files[0].getInputStream();
+					inputStream = file.getInputStream();
 					IOUtils.copy(inputStream, fileOutputStream);
 				}
 
@@ -84,29 +97,8 @@ public class UserController extends BasicController {
 				fileOutputStream.close();
 			}
 		}
-		MyUsers user = new MyUsers();
-		user.setId(userId);
-		user.setFaceImage(uploadPathDB);
 
-
-			userService.updateUserInfo(user);
-
-
-
-		return HulincloudJSONResult.ok(user);
+		return HulincloudJSONResult.ok();
 	}
-	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口")
-	@ApiImplicitParam(name="userId", value="用户id", required=true,
-			dataType="String", paramType="query")
-	@PostMapping("/query")
-	public HulincloudJSONResult query(String userId) throws Exception {
 
-		if (StringUtils.isBlank(userId)) {
-			return HulincloudJSONResult.errorMsg("用户id不能为空...");
-		}
-		MyUsers userInfo = userService.queryUserInfo(userId);
-		UsersVO usersVO = new UsersVO();
-		BeanUtils.copyProperties(userInfo, usersVO);
-		return HulincloudJSONResult.ok(usersVO);
-	}
 }

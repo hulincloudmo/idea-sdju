@@ -1,7 +1,7 @@
 package com.imooc.controller;
 
 import com.imooc.service.BgmService;
-import com.imooc.utils.IMoocJSONResult;
+import com.imooc.utils.HulincloudJSONResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +22,9 @@ public class BgmController {
 
 	@ApiOperation(value = "获取音乐列表", notes = "获取背景音乐列表接口")
 	@PostMapping("/list")
-	public IMoocJSONResult list() {
+	public HulincloudJSONResult list() {
 
-		return IMoocJSONResult.ok(bgmService.queryBgmList());
+		return HulincloudJSONResult.ok(bgmService.queryBgmList());
 	}
 	
 }

@@ -3,7 +3,7 @@ package com.imooc.controller;
 import com.imooc.pojo.MyUsers;
 import com.imooc.pojo.vo.UsersVO;
 import com.imooc.service.UserService;
-import com.imooc.utils.IMoocJSONResult;
+import com.imooc.utils.HulincloudJSONResult;
 import com.imooc.utils.MD5Utils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -29,13 +29,13 @@ public class RegisterController extends BasicController {
 
 	@ApiOperation(value = "用户注册接口",notes = "注册")
 	@PostMapping("/register")
-	public IMoocJSONResult register(@RequestBody MyUsers user) {
+	public HulincloudJSONResult register(@RequestBody MyUsers user) {
 
 		/**
 		 * 1.判断用户名密码不为空
 		 * **/
 		if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())){
-			return IMoocJSONResult.errorMsg("用户名和密码不能为空");
+			return HulincloudJSONResult.errorMsg("用户名和密码不能为空");
 		}
 
 
@@ -54,7 +54,7 @@ public class RegisterController extends BasicController {
 			}
 
 		}else {
-			return IMoocJSONResult.errorMsg("用户已经存在");
+			return HulincloudJSONResult.errorMsg("用户已经存在");
 		}
 
 
@@ -62,7 +62,7 @@ public class RegisterController extends BasicController {
 
 		UsersVO userVO = setUserRedisSessionToken(user);
 
-		return IMoocJSONResult.ok();
+		return HulincloudJSONResult.ok(userVO);
 	}
 
 	public UsersVO setUserRedisSessionToken(MyUsers userModel) {
@@ -79,9 +79,9 @@ public class RegisterController extends BasicController {
 	@ApiImplicitParam(name="userId", value="用户id", required=true,
 			dataType="String", paramType="query")
 	@PostMapping("/logout")
-	public IMoocJSONResult logout(String userId) {
+	public HulincloudJSONResult logout(String userId) {
 		redis.del(USER_REDIS_SESSION + ":" +userId);
-		return IMoocJSONResult.ok();
+		return HulincloudJSONResult.ok();
 	}
 
 }
