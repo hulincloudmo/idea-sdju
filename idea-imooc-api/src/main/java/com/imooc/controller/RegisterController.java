@@ -58,11 +58,39 @@ public class RegisterController extends BasicController {
 		}
 
 
-		user.setPassword("");
+
 
 		UsersVO userVO = setUserRedisSessionToken(user);
 
 		return HulincloudJSONResult.ok(userVO);
+	}
+
+
+	@ApiOperation(value="用户登录", notes="用户登录的接口")
+	@PostMapping("/userlogin")
+	public HulincloudJSONResult login(@RequestBody MyUsers user) throws Exception {
+		String username = user.getUsername();
+		String password = user.getPassword();
+
+//		Thread.sleep(3000);
+
+		// 1. 判断用户名和密码必须不为空
+		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
+			return HulincloudJSONResult.ok("用户名或密码不能为空...");
+		}
+
+		// 2. 判断用户是否存在
+		MyUsers userResult = userService.queryUserForLogin(username,
+				MD5Utils.getMD5Str(user.getPassword()));
+
+		// 3. 返回
+		if (userResult != null) {
+			userResult.setPassword("");
+			UsersVO userVO = setUserRedisSessionToken(userResult);
+			return HulincloudJSONResult.ok(userVO);
+		} else {
+			return HulincloudJSONResult.errorMsg("用户名或密码不正确, 请重试...");
+		}
 	}
 
 	public UsersVO setUserRedisSessionToken(MyUsers userModel) {

@@ -11,6 +11,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,19 +32,18 @@ public class UserController extends BasicController {
 
 	@ApiOperation(value="用户上传头像", notes="用户上传头像的接口")
 	@ApiImplicitParams({
+			@ApiImplicitParam(name = "file", value = "头像", required = true, dataType = "MultipartFile", allowMultiple = true),
 			@ApiImplicitParam(name="userId", value="用户id", required=true,
 					dataType="String", paramType="query")
 	})
-	@PostMapping(value = "/uploadFace", headers = "content-type=multipart/from-data")
+
+	@PostMapping(value = "/uploadFace")
 	public HulincloudJSONResult uploadFace(String userId,
-										   @ApiParam(value = "头像", required = true) MultipartFile[] files) throws Exception {
+										   @RequestParam(value = "file", required = true) MultipartFile[] files) throws Exception {
 
 		if (StringUtils.isBlank(userId)) {
 			return HulincloudJSONResult.errorMsg("用户id不能为空...");
 		}
-
-
-
 		// 文件保存的命名空间
 		String fileSpace = "D:\\SDJU_research_userData";
 		// 保存到数据库中的相对路径
@@ -89,13 +89,13 @@ public class UserController extends BasicController {
 		user.setFaceImage(uploadPathDB);
 
 
-			userService.updateUserInfo(user);
+		userService.updateUserInfo(user);
 
 
 
 		return HulincloudJSONResult.ok(user);
 	}
-	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口")
+	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口", position = 0)
 	@ApiImplicitParam(name="userId", value="用户id", required=true,
 			dataType="String", paramType="query")
 	@PostMapping("/query")
