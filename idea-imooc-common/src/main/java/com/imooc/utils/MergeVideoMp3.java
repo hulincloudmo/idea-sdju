@@ -15,8 +15,8 @@ import java.util.List;
 public class MergeVideoMp3 {
     private String ffmpegEXE;
 
-    public void FFMpegTest(String ffmpegEXE) {
-
+    public MergeVideoMp3(String ffmpegEXE) {
+        super();
         this.ffmpegEXE = ffmpegEXE;
     }
 

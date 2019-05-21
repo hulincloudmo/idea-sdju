@@ -87,7 +87,7 @@ public class UserController extends BasicController {
 		MyUsers user = new MyUsers();
 		user.setId(userId);
 		user.setFaceImage(uploadPathDB);
-
+		user.setPassword("");
 
 		userService.updateUserInfo(user);
 

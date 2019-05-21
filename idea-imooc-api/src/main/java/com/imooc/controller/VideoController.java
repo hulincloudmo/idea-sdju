@@ -4,6 +4,7 @@ import com.imooc.pojo.Bgm;
 import com.imooc.service.BgmService;
 import com.imooc.service.UserService;
 import com.imooc.utils.HulincloudJSONResult;
+import com.imooc.utils.MergeVideoMp3;
 import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -23,7 +24,7 @@ import java.io.InputStream;
 @RestController
 @Api(value = "视频相关接口", tags = {"视频controller"})
 @RequestMapping("/video")
-public class VideoController {
+public class VideoController extends BasicController {
 
 	@Autowired
 	private BgmService bgmService;
@@ -63,19 +64,22 @@ public class VideoController {
 
 
 		// 文件保存的命名空间
-		String fileSpace = "D:\\SDJU_research_userData";
+//		String fileSpace = "D:\\SDJU_research_userData";
 		// 保存到数据库中的相对路径
 		String uploadPathDB = "/" + userId + "/video";
 
 		FileOutputStream fileOutputStream = null;
 		InputStream inputStream = null;
+
+		String finalVideoPath = "";
+
 		try {
 			if (file != null ) {
 
 				String fileName = file.getOriginalFilename();
 				if (StringUtils.isNotBlank(fileName)) {
 					// 文件上传的最终保存路径
-					String finalVideoPath = fileSpace + uploadPathDB + "/" + fileName;
+					finalVideoPath = FILE_SPACE + uploadPathDB + "/" + fileName;
 					// 设置数据库保存的路径
 					uploadPathDB += ("/" + fileName);
 
@@ -106,7 +110,13 @@ public class VideoController {
 		//判断BGMID是否为空，如果BGM不为空，就查询BGM信息，并且合并视频，生成新的视频
 		if (StringUtils.isNotBlank(bgmId)) {
 			Bgm bgm = bgmService.queryBgmById(bgmId);
-			String mp3InputPath =fileSpace + bgm.getPath();
+			String mp3InputPath =FILE_SPACE + bgm.getPath();
+
+
+			MergeVideoMp3 tool = new MergeVideoMp3(FFMPEG_EXE);
+			finalVideoPath = "";
+
+//			tool.convertor();
 		}
 		return HulincloudJSONResult.ok();
 	}

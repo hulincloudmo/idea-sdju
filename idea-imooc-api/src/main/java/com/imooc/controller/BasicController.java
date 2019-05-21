@@ -2,7 +2,6 @@ package com.imooc.controller;
 
 import com.imooc.utils.RedisOperator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -15,5 +14,16 @@ public class BasicController {
 	public RedisOperator redis;
 
 	public static final String USER_REDIS_SESSION = "user-redis-session";
-	
+
+	public static final String FFMPEG_EXE = "D:\\SDJU_research_userData\\ffmpeg-20190517-c3458f0-win64-static\\bin";
+
+	/***
+	 *
+	 *
+
+	 * 文件保存路径
+	 * @author hulincloud
+	 * @date 2019/5/21 12:04
+	 */
+	public static final String FILE_SPACE = "D:\\SDJU_research_userData";
 }
