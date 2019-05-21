@@ -17,4 +17,13 @@ public interface BgmService {
      * @date 2019/5/17 11:00
      */
     public List<Bgm> queryBgmList();
+    /***
+     *
+     *
+     * @param
+     * @return com.imooc.pojo.Bgm
+     * @author hulincloud
+     * @date 2019/5/20 15:29
+     */
+    public Bgm queryBgmById(String BgmId);
 }

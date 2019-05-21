@@ -1,5 +1,7 @@
 package com.imooc.utils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @Description: 自定义响应数据结构
  * 				这个类是提供给门户，ios，安卓，微信商城用的
@@ -21,8 +23,17 @@ public class HulincloudJSONResult {
 
     // 响应中的数据
     private Object data;
-    
-    private String ok;	// 不使用
+
+    /**
+     *
+     *
+
+     * @return
+     * @author hulincloud
+     * @date 2019/5/19 23:38
+     */
+    @JsonIgnore
+    private String ok;
 
     public static HulincloudJSONResult build(Integer status, String msg, Object data) {
         return new HulincloudJSONResult(status, msg, data);
@@ -95,7 +106,7 @@ public class HulincloudJSONResult {
     public void setData(Object data) {
         this.data = data;
     }
-
+//
 	public String getOk() {
 		return ok;
 	}

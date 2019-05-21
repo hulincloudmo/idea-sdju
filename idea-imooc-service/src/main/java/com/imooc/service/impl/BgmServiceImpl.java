@@ -5,6 +5,8 @@ import com.imooc.service.BgmService;
 import mapper.BgmMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,8 +25,15 @@ public class BgmServiceImpl implements BgmService {
     @Autowired
     private BgmMapper bgmMapper;
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Bgm> queryBgmList() {
         return bgmMapper.selectAll();
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    @Override
+    public Bgm queryBgmById(String BgmId) {
+        return bgmMapper.selectByPrimaryKey(BgmId);
     }
 }

@@ -1,20 +1,18 @@
 package com.imooc.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
+import com.imooc.utils.HulincloudJSONResult;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author hulincloud
  */
 @RestController
-
 public class HelloWorldController {
-
-
-	
-	@PostMapping("/basic")
-	public String basic() {
-		return "这是复制用的";
+	@RequestMapping(value="/hello",method= RequestMethod.GET)
+	public HulincloudJSONResult basic() {
+		return HulincloudJSONResult.ok("hello");
 	}
 	
 }

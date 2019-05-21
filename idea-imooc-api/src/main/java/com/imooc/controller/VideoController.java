@@ -1,5 +1,7 @@
 package com.imooc.controller;
 
+import com.imooc.pojo.Bgm;
+import com.imooc.service.BgmService;
 import com.imooc.service.UserService;
 import com.imooc.utils.HulincloudJSONResult;
 import io.swagger.annotations.*;
@@ -22,6 +24,9 @@ import java.io.InputStream;
 @Api(value = "视频相关接口", tags = {"视频controller"})
 @RequestMapping("/video")
 public class VideoController {
+
+	@Autowired
+	private BgmService bgmService;
 
 	@Autowired
 	private UserService userService;
@@ -98,6 +103,11 @@ public class VideoController {
 			}
 		}
 
+		//判断BGMID是否为空，如果BGM不为空，就查询BGM信息，并且合并视频，生成新的视频
+		if (StringUtils.isNotBlank(bgmId)) {
+			Bgm bgm = bgmService.queryBgmById(bgmId);
+			String mp3InputPath =fileSpace + bgm.getPath();
+		}
 		return HulincloudJSONResult.ok();
 	}
 
