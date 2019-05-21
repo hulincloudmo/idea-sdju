@@ -34,6 +34,13 @@ public class BgmServiceImpl implements BgmService {
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public Bgm queryBgmById(String BgmId) {
+//        Example BgmExample = new Example(Bgm.class);
+//        Example.Criteria criteria = BgmExample.createCriteria();
+//        criteria.andEqualTo("id",BgmId);
+//        Bgm result = bgmMapper.selectOneByExample(BgmExample);
+//        return result;
+
         return bgmMapper.selectByPrimaryKey(BgmId);
+
     }
 }

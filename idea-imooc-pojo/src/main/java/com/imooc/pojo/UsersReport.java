@@ -1,11 +1,13 @@
 package com.imooc.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "users_report")
 public class UsersReport {
+    @Id
     private String id;
 
     /**

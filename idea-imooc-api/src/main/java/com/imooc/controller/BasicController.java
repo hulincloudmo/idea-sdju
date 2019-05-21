@@ -15,7 +15,7 @@ public class BasicController {
 
 	public static final String USER_REDIS_SESSION = "user-redis-session";
 
-	public static final String FFMPEG_EXE = "D:\\SDJU_research_userData\\ffmpeg-20190517-c3458f0-win64-static\\bin";
+	public static final String FFMPEG_EXE = "D:\\SDJU_research_userData\\ffmpeg\\bin";
 
 	/***
 	 *

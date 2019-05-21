@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.UUID;
 
 /**
  * @author hulincloud
@@ -47,6 +48,7 @@ public class VideoController extends BasicController {
 			@ApiImplicitParam(name="desc", value="视频描述", required=false,
 					dataType="String", paramType="form")
 	})
+
 
 
 	@PostMapping(value="/upload", headers="content-type=multipart/form-data")
@@ -114,11 +116,21 @@ public class VideoController extends BasicController {
 
 
 			MergeVideoMp3 tool = new MergeVideoMp3(FFMPEG_EXE);
-			finalVideoPath = "";
+			String videoInputPath = finalVideoPath;
+			String videoOutPutName = UUID.randomUUID().toString()+ ".mp4";
+			uploadPathDB = "/" + userId + "/video" + "/" + videoOutPutName;
+			finalVideoPath = FILE_SPACE + uploadPathDB;
 
-//			tool.convertor();
+			tool.convertor(videoInputPath, mp3InputPath, videoSeconds, finalVideoPath);
+			System.out.println(uploadPathDB);
 		}
 		return HulincloudJSONResult.ok();
+	}
+
+	@PostMapping("/test")
+	public HulincloudJSONResult test(String bgmid){
+		Bgm bgm = bgmService.queryBgmById(bgmid);
+		return HulincloudJSONResult.ok(bgm);
 	}
 
 }

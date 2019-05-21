@@ -1,6 +1,10 @@
 package com.imooc.pojo;
 
+import javax.persistence.Id;
+
 public class Bgm {
+
+    @Id
     private String id;
 
     private String author;

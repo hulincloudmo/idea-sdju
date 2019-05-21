@@ -1,9 +1,11 @@
 package com.imooc.pojo;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "search_records")
 public class SearchRecords {
+    @Id
     private String id;
 
     /**

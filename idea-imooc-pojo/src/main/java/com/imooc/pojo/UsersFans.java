@@ -1,10 +1,12 @@
 package com.imooc.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Table(name = "users_fans")
 public class UsersFans {
+    @Id
     private String id;
 
     /**

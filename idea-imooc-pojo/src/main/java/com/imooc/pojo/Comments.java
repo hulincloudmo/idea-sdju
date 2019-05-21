@@ -1,9 +1,12 @@
 package com.imooc.pojo;
 
 import javax.persistence.Column;
+import javax.persistence.Id;
 import java.util.Date;
 
 public class Comments {
+
+    @Id
     private String id;
 
     @Column(name = "father_comment_id")

@@ -20,18 +20,26 @@ public class MergeVideoMp3 {
         this.ffmpegEXE = ffmpegEXE;
     }
 
-    public void convertor(String videoInputPath, String videoOutputPath, String MP3OutputPath, double senconds) throws Exception {
-        ProcessBuilder processBuilder = new ProcessBuilder();
+    public void convertor(String videoInputPath, String mp3InputPath,
+                          double seconds, String videoOutputPath) throws Exception {
+
         List<String> command = new ArrayList<>();
         command.add(ffmpegEXE);
+
         command.add("-i");
         command.add(videoInputPath);
+
         command.add("-i");
-        command.add(MP3OutputPath);
+        command.add(mp3InputPath);
+
         command.add("-t");
-        command.add(String.valueOf(senconds));
+        command.add(String.valueOf(seconds));
+
         command.add("-y");
         command.add(videoOutputPath);
-        processBuilder.start();
+
+        ProcessBuilder builder = new ProcessBuilder(command);
+        Process process = builder.start();
+
     }
 }
