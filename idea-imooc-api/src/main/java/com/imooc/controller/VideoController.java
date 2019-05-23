@@ -3,8 +3,10 @@ package com.imooc.controller;
 import com.imooc.pojo.Bgm;
 import com.imooc.service.BgmService;
 import com.imooc.service.UserService;
+import com.imooc.service.VideoService;
 import com.imooc.utils.HulincloudJSONResult;
 import com.imooc.utils.MergeVideoMp3;
+import com.imooc.utils.PagedResult;
 import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,6 +34,9 @@ public class VideoController extends BasicController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private VideoService videoService;
 
 	@ApiOperation(value="用户上传视频", notes="用户上传视频的接口")
 	@ApiImplicitParams({
@@ -131,6 +136,18 @@ public class VideoController extends BasicController {
 	public HulincloudJSONResult test(String bgmid){
 		Bgm bgm = bgmService.queryBgmById(bgmid);
 		return HulincloudJSONResult.ok(bgm);
+	}
+
+	@PostMapping("/showAll")
+	public HulincloudJSONResult showAll(Integer page){
+
+		if (page == null){
+			page = 1;
+
+		}
+
+		PagedResult result = videoService.getAllVideos(page, PAGE_SIZE);
+		return HulincloudJSONResult.ok(result);
 	}
 
 }

@@ -26,4 +26,6 @@ public class BasicController {
 	 * @date 2019/5/21 12:04
 	 */
 	public static final String FILE_SPACE = "D:\\SDJU_research_userData";
+
+	public static final Integer PAGE_SIZE  = 5;
 }
