@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.pojo.Videos;
 import com.imooc.utils.PagedResult;
 
 /**
@@ -13,4 +14,8 @@ import com.imooc.utils.PagedResult;
  */
 public interface  VideoService {
     public PagedResult getAllVideos(Integer page, Integer pagesize);
+
+    public void saveVideo(Videos videos);
 }
+
+

@@ -9,6 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <name>SDJU科研管理系统后端API实现层</name>
     <artifactId>idea-imooc-api</artifactId>
     <dependencies>
         <dependency>

@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.pojo.Bgm;
+import com.imooc.pojo.Videos;
 import com.imooc.service.BgmService;
 import mapper.BgmMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class BgmServiceImpl implements BgmService {
     @Autowired
     private BgmMapper bgmMapper;
 
+
+
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
     public List<Bgm> queryBgmList() {
@@ -43,4 +46,5 @@ public class BgmServiceImpl implements BgmService {
         return bgmMapper.selectByPrimaryKey(BgmId);
 
     }
+
 }

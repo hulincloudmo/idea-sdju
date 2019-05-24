@@ -21,17 +21,17 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private Sid sid;
-    @Transactional(propagation = Propagation.SUPPORTS)
+
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
     public boolean queryUsernameIsExist(String username) {
 
         MyUsers user = new MyUsers();
         user.setUsername(username);
         MyUsers result = usersMapper.selectOne(user);
-
         return result == null ? false:true;
     }
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
     public void saveUser(MyUsers user) {
         String userId = sid.nextShort();
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         usersMapper.insert(user);
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
     public MyUsers queryUserForLogin(String username, String password) {
 
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
     public MyUsers queryUserInfo(String userId) {
 
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
         return users;
 
     }
-
+    @Transactional(propagation = Propagation.SUPPORTS,rollbackFor = Exception.class)
     @Override
     public void updateUserInfo(MyUsers user) {
         Example userExample = new Example(MyUsers.class);

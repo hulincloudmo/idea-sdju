@@ -1,7 +1,10 @@
 package com.imooc.utils;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.InputStreamReader;
 
 /**
  * @ProjectName: idea-imooc
@@ -38,8 +41,27 @@ public class MergeVideoMp3 {
         command.add("-y");
         command.add(videoOutputPath);
 
+
         ProcessBuilder builder = new ProcessBuilder(command);
         Process process = builder.start();
+
+        InputStream errorStream = process.getErrorStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(errorStream);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+
+        String line = "";
+        while ( (line = br.readLine()) != null ) {
+        }
+
+        if (br != null) {
+            br.close();
+        }
+        if (inputStreamReader != null) {
+            inputStreamReader.close();
+        }
+        if (errorStream != null) {
+            errorStream.close();
+        }
 
     }
 }

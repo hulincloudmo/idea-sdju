@@ -95,7 +95,7 @@ public class UserController extends BasicController {
 
 		return HulincloudJSONResult.ok(user);
 	}
-	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口", position = 0)
+	@ApiOperation(value="查询用户信息", notes="查询用户信息的接口")
 	@ApiImplicitParam(name="userId", value="用户id", required=true,
 			dataType="String", paramType="query")
 	@PostMapping("/query")
