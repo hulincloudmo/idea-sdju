@@ -57,10 +57,20 @@ public class VideoServiceImpl implements VideoService {
     }
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public void saveVideo(Videos videos) {
+    public String saveVideo(Videos videos) {
 
         String id = sid.nextShort();
         videos.setId(id);
         videosMapper.insertSelective(videos);
+        return id;
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Override
+    public void updateVideo(String videoId, String coverPath) {
+        Videos video = new Videos();
+        video.setId(videoId);
+        video.setCoverPath(coverPath);
+        videosMapper.updateByPrimaryKeySelective(video);
     }
 }

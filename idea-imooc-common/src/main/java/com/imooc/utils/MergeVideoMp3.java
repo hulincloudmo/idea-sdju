@@ -2,9 +2,9 @@ package com.imooc.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.io.InputStreamReader;
 
 /**
  * @ProjectName: idea-imooc
@@ -23,10 +23,52 @@ public class MergeVideoMp3 {
         this.ffmpegEXE = ffmpegEXE;
     }
 
+    public String clearMusic(String videoInputPath, String videoOutputPath,String userId) throws Exception{
+
+        videoOutputPath= videoOutputPath;
+        String uploadPathDB = "/" + userId + "/video" + "/" + videoOutputPath;
+        String finalVideoPath = "D:\\SDJU_research_userData" + uploadPathDB;
+
+
+        List<String> command = new ArrayList<>();
+        command.add(ffmpegEXE);
+
+
+        command.add("-i");
+        command.add(videoInputPath);
+        command.add("-c:v");
+
+        command.add("copy");
+
+        command.add("-an");
+        command.add(finalVideoPath);
+
+//        System.out.println("clear:"+command);
+
+        ProcessBuilder builder = new ProcessBuilder(command);
+        Process process = builder.start();
+
+
+        return finalVideoPath;
+    }
+
     public void convertor(String videoInputPath, String mp3InputPath,
                           double seconds, String videoOutputPath) throws Exception {
 
         List<String> command = new ArrayList<>();
+
+//        command.add(ffmpegEXE);
+//
+//        command.add("-i");
+//        command.add(videoInputPath);
+//
+//        command.add("-an");
+//        command.add(videoOutputPath);
+//
+//
+//        command.add("&&");
+
+
         command.add(ffmpegEXE);
 
         command.add("-i");
@@ -40,6 +82,7 @@ public class MergeVideoMp3 {
 
         command.add("-y");
         command.add(videoOutputPath);
+//        System.out.println(command);
 
 
         ProcessBuilder builder = new ProcessBuilder(command);
@@ -62,6 +105,10 @@ public class MergeVideoMp3 {
         if (errorStream != null) {
             errorStream.close();
         }
+
+    }
+
+    public static void main(String[] args) {
 
     }
 }

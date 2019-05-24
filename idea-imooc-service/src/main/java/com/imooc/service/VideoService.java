@@ -15,7 +15,9 @@ import com.imooc.utils.PagedResult;
 public interface  VideoService {
     public PagedResult getAllVideos(Integer page, Integer pagesize);
 
-    public void saveVideo(Videos videos);
+    public String saveVideo(Videos videos);
+
+    public void updateVideo(String videoId, String coverPath);
 }
 
 
