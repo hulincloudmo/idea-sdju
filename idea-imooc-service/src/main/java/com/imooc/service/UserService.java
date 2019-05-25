@@ -32,6 +32,10 @@ public interface UserService {
      */
     public MyUsers queryUserForLogin(String username, String password);
 
+    public MyUsers queryUserForLoginWX(String openid);
+
+    public boolean queryWorkIdIsExist(String workId);
+
     /**
      *
      * 用户查询信息
@@ -46,5 +50,8 @@ public interface UserService {
      *
      * **/
     public void updateUserInfo(MyUsers user);
+
+    public boolean queryOpenIdIsExist(String openid);
+
 
 }

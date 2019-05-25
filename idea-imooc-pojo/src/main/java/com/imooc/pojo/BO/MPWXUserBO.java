@@ -1,76 +1,30 @@
-package com.imooc.pojo;
+package com.imooc.pojo.BO;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * @author hulincloud
  */
-@Table(name = "my_users")
-public class MyUsers {
-    @Id
+@ApiModel(value = "微信登录用户对象", description = "从客户端获取到的数据封装")
+public class MPWXUserBO {
     @ApiModelProperty(hidden = true)
     private String id;
 
-    /**
-     * 用户名
-     */
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(hidden = true)
     private String username;
-
-    /**
-     * 密码
-     */
-    @ApiModelProperty(value = "密码")
+    @ApiModelProperty(hidden = true)
     private String password;
-
-    /**
-     * 我的头像，如果没有默认给一张
-     */
-    @ApiModelProperty(hidden = true)
-    @Column(name = "face_image")
+    @ApiModelProperty(value = "头像", name = "avatarUrl", example = "http://xxx", required = true)
     private String faceImage;
-
-    /**
-     * 昵称
-     */
-    @ApiModelProperty(hidden = true)
+    @ApiModelProperty(value = "昵称", name = "nickname", example = "hulincloud", required = true)
     private String nickname;
-
-    /**
-     * 我的粉丝数量
-     */
     @ApiModelProperty(hidden = true)
-    @Column(name = "fans_counts")
     private Integer fansCounts;
-
-    /**
-     * 我关注的人总数
-     */
     @ApiModelProperty(hidden = true)
-    @Column(name = "follow_counts")
     private Integer followCounts;
-
-    /**
-     * 我接受到的赞美/收藏 的数量
-     */
     @ApiModelProperty(hidden = true)
-    @Column(name = "receive_like_counts")
     private Integer receiveLikeCounts;
-
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    @ApiModelProperty(hidden = true)
-    private String openid;
 
 
 

@@ -54,6 +54,19 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
+    public MyUsers queryUserForLoginWX(String openid) {
+
+
+        return null;
+    }
+
+    @Override
+    public boolean queryWorkIdIsExist(String workId) {
+        return false;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+    @Override
     public MyUsers queryUserInfo(String userId) {
 
         Example userExample = new Example(MyUsers.class);
@@ -70,6 +83,14 @@ public class UserServiceImpl implements UserService {
         Criteria criteria = userExample.createCriteria();
         criteria.andEqualTo("id", user.getId());
         usersMapper.updateByExampleSelective(user, userExample);
+    }
+
+    @Override
+    public boolean queryOpenIdIsExist(String openid) {
+        MyUsers user = new MyUsers();
+        user.setOpenid(openid);
+        MyUsers result = usersMapper.selectOne(user);
+        return result == null ? false:true;
     }
 
 }

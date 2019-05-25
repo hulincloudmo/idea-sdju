@@ -13,5 +13,7 @@
     <result column="fans_counts" property="fansCounts" jdbcType="INTEGER" />
     <result column="follow_counts" property="followCounts" jdbcType="INTEGER" />
     <result column="receive_like_counts" property="receiveLikeCounts" jdbcType="INTEGER" />
+    <result column="openid" property="openid" jdbcType="VARCHAR" />
+
   </resultMap>
 </mapper>
