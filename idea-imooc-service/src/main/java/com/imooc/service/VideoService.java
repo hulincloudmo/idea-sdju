@@ -18,6 +18,7 @@ public interface  VideoService {
     public String saveVideo(Videos videos);
 
     public void updateVideo(String videoId, String coverPath);
-}
 
+//    public String updateVideo(String videoId, String coverpath)
+}
 
