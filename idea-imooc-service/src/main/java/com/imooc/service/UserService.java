@@ -1,5 +1,6 @@
 package com.imooc.service;
 
+import com.imooc.pojo.BO.MPWXUserBO;
 import com.imooc.pojo.MyUsers;
 
 public interface UserService {
@@ -20,6 +21,8 @@ public interface UserService {
      * @date 2019/5/17 10:47
      */
     public void saveUser(MyUsers users);
+
+    public MyUsers saveUserMPWXOpenId(String openId, MPWXUserBO wxUserBo);
 
     /**
      *

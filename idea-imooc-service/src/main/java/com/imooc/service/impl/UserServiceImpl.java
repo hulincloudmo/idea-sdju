@@ -1,5 +1,6 @@
 package com.imooc.service.impl;
 
+import com.imooc.pojo.BO.MPWXUserBO;
 import com.imooc.pojo.MyUsers;
 import com.imooc.service.UserService;
 import mapper.MyUsersMapper;
@@ -38,6 +39,17 @@ public class UserServiceImpl implements UserService {
         user.setId(userId);
         usersMapper.insert(user);
     }
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    @Override
+    public MyUsers saveUserMPWXOpenId(String openId, MPWXUserBO wxUserBo) {
+        String userId = sid.nextShort();
+        MyUsers user = new MyUsers();
+        user.setId(userId);
+        user.setOpenid(openId);
+        user.setNickname(wxUserBo.getNickname());
+        usersMapper.insert(user);
+        return user;
+    }
 
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
@@ -55,9 +67,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
     @Override
     public MyUsers queryUserForLoginWX(String openid) {
+        Example userExample = new Example(MyUsers.class);
+        Criteria criteria = userExample.createCriteria();
+        criteria.andEqualTo("openid",openid);
+        MyUsers result = usersMapper.selectOneByExample(userExample);
 
-
-        return null;
+        return result;
     }
 
     @Override
