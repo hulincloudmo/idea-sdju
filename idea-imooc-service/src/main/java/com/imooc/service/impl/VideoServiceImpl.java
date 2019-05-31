@@ -2,10 +2,12 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.imooc.pojo.SearchRecords;
 import com.imooc.pojo.Videos;
 import com.imooc.pojo.vo.VideosVO;
 import com.imooc.service.VideoService;
 import com.imooc.utils.PagedResult;
+import mapper.SearchRecordsMapper;
 import mapper.VideosMapper;
 import mapper.VideosMapperCustom;
 import org.n3r.idworker.Sid;
@@ -35,11 +37,24 @@ public class VideoServiceImpl implements VideoService {
     private VideosMapper videosMapper;
 
     @Autowired
+    private SearchRecordsMapper searchRecordsMapper;
+
+    @Autowired
     private Sid sid;
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public PagedResult getAllVideos(Integer page, Integer pageSize) {
+    public PagedResult getAllVideos(Videos video,Integer SaveRecord , Integer page, Integer pageSize) {
+
+        String desc = video.getVideoDesc();
+
+        if (SaveRecord != null && SaveRecord == 1){
+            SearchRecords record = new SearchRecords();
+            String recordid = sid.nextShort();
+            record.setId(recordid);
+            record.setContent(desc);
+            searchRecordsMapper.insert(record);
+        }
 
         PageHelper.startPage(page,pageSize);
 

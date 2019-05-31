@@ -74,6 +74,11 @@ public class MyUsers {
 
 
 
+    @ApiModelProperty(hidden = true)
+    private String wxapp_openid;
+
+
+
     /**
      * @return id
      */
@@ -213,4 +218,13 @@ public class MyUsers {
     public void setReceiveLikeCounts(Integer receiveLikeCounts) {
         this.receiveLikeCounts = receiveLikeCounts;
     }
+
+    public String getWxapp_openid() {
+        return wxapp_openid;
+    }
+
+    public void setWxapp_openid(String wxapp_openid) {
+        this.wxapp_openid = wxapp_openid;
+    }
 }
+

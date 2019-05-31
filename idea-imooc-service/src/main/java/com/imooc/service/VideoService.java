@@ -13,7 +13,8 @@ import com.imooc.utils.PagedResult;
  * @Version: 1.0
  */
 public interface  VideoService {
-    public PagedResult getAllVideos(Integer page, Integer pagesize);
+    public PagedResult getAllVideos(
+            Videos video,Integer SaveRecord , Integer page, Integer pagesize);
 
     public String saveVideo(Videos videos);
 

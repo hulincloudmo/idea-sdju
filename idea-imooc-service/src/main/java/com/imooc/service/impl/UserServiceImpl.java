@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         user.setId(userId);
         user.setOpenid(openId);
         user.setNickname(wxUserBo.getNickname());
+        user.setFaceImage(wxUserBo.getFaceImage());
         usersMapper.insert(user);
         return user;
     }
@@ -78,6 +79,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean queryWorkIdIsExist(String workId) {
         return false;
+    }
+
+    @Override
+    public boolean queryappopenidIsExist(String appopenid) {
+        MyUsers user = new MyUsers();
+        user.setWxapp_openid(appopenid);
+        MyUsers result = usersMapper.selectOne(user);
+        return result == null ? false:true;
     }
 
     @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)

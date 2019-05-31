@@ -14,6 +14,7 @@
     <result column="follow_counts" property="followCounts" jdbcType="INTEGER" />
     <result column="receive_like_counts" property="receiveLikeCounts" jdbcType="INTEGER" />
     <result column="openid" property="openid" jdbcType="VARCHAR" />
+    <result column="wxapp_openid" property="wxapp_openid" jdbcType="VARCHAR" />
 
   </resultMap>
 </mapper>

@@ -14,10 +14,7 @@ import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -165,13 +162,13 @@ public class VideoController extends BasicController {
     }
 
     @PostMapping("/showAll")
-    public HulincloudJSONResult showAll(Integer page) {
+    public HulincloudJSONResult showAll(@RequestBody Videos video,Integer SaveRecord , Integer page) {
 
         if (page == null) {
             page = 1;
         }
 
-        PagedResult result = videoService.getAllVideos(page, PAGE_SIZE);
+        PagedResult result = videoService.getAllVideos(video, SaveRecord, page, PAGE_SIZE);
         return HulincloudJSONResult.ok(result);
     }
 

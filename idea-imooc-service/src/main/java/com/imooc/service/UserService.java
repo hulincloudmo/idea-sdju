@@ -39,6 +39,8 @@ public interface UserService {
 
     public boolean queryWorkIdIsExist(String workId);
 
+    public boolean queryappopenidIsExist(String appopenid);
+
     /**
      *
      * 用户查询信息

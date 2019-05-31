@@ -26,7 +26,7 @@ import java.util.UUID;
 /**
  * @author hulincloud
  */
-@Api(value = "微信登录接口", tags = {"app微信登录或小程序微信登录"})
+@Api(value = "微信登录接口", tags = {"小程序微信登录"})
 @RestController
 public class WXLoginController extends BasicController {
 
@@ -56,6 +56,7 @@ public class WXLoginController extends BasicController {
 		param.put("grant_type", "authorization_code");
 
 		String wxResult = HttpClientUtil.doGet(url, param);
+		System.out.println(wxResult);
 
 		WXSessionBO model = JsonUtils.jsonToPojo(wxResult, WXSessionBO.class);
 
@@ -68,14 +69,14 @@ public class WXLoginController extends BasicController {
 			userResult = userService.queryUserForLoginWX(openId);
 			System.out.println("用户存在，登录成功");
 		}else {
-			//尚未注册，拒绝用户注册
+			//尚未注册，不开放注册，确认工号是否在数据库存在，不存在则拒绝用户注册
 //			boolean workIdIsExist = userService.queryWorkIdIsExist(workid);
 //			if (workIdIsExist){
-//
+//					//工号存在，将工号和用户微信绑定（update workid）
 //			}else{
 //				return HulincloudJSONResult.errorMsg("此工号尚未注册，请联系管理员添加");
 //			}
-			//开放注册业务
+			//开放注册业务，需填入完整用户数据
 			userResult = userService.saveUserMPWXOpenId(openId,wxUserBO);
 
 		}
