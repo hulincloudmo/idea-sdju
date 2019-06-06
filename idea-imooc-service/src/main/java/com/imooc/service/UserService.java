@@ -1,6 +1,5 @@
 package com.imooc.service;
 
-import com.imooc.pojo.BO.MPWXUserBO;
 import com.imooc.pojo.MyUsers;
 
 public interface UserService {
@@ -22,7 +21,7 @@ public interface UserService {
      */
     public void saveUser(MyUsers users);
 
-    public MyUsers saveUserMPWXOpenId(String openId, MPWXUserBO wxUserBo);
+//    public MyUsers saveUserMPWXOpenId(String openId, MPWXUserBO wxUserBo);
 
     /**
      *
@@ -35,11 +34,11 @@ public interface UserService {
      */
     public MyUsers queryUserForLogin(String username, String password);
 
-    public MyUsers queryUserForLoginWX(String openid);
+//    public MyUsers queryUserForLoginWX(String openid);
 
     public boolean queryWorkIdIsExist(String workId);
 
-    public boolean queryappopenidIsExist(String appopenid);
+//    public boolean queryappopenidIsExist(String appopenid);
 
     /**
      *
@@ -56,7 +55,7 @@ public interface UserService {
      * **/
     public void updateUserInfo(MyUsers user);
 
-    public boolean queryOpenIdIsExist(String openid);
+//    public boolean queryOpenIdIsExist(String openid);
 
 
 }

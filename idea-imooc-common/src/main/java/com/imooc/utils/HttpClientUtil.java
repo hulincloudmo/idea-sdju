@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @ProjectName: idea-imooc
- * @Package: com.imooc.utils
  * @ClassName: HttpClientUtil
  * @Author: hulincloud
  * @Description: 通用Http请求

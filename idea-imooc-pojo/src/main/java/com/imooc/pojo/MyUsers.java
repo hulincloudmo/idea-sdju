@@ -57,25 +57,11 @@ public class MyUsers {
     /**
      * 我接受到的赞美/收藏 的数量
      */
+
     @ApiModelProperty(hidden = true)
     @Column(name = "receive_like_counts")
     private Integer receiveLikeCounts;
 
-    public String getOpenid() {
-        return openid;
-    }
-
-    public void setOpenid(String openid) {
-        this.openid = openid;
-    }
-
-    @ApiModelProperty(hidden = true)
-    private String openid;
-
-
-
-    @ApiModelProperty(hidden = true)
-    private String wxapp_openid;
 
 
 
@@ -219,12 +205,6 @@ public class MyUsers {
         this.receiveLikeCounts = receiveLikeCounts;
     }
 
-    public String getWxapp_openid() {
-        return wxapp_openid;
-    }
 
-    public void setWxapp_openid(String wxapp_openid) {
-        this.wxapp_openid = wxapp_openid;
-    }
 }
 

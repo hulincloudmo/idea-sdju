@@ -237,4 +237,21 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok();
     }
 
+    @PostMapping(value = "/hot")
+    public HulincloudJSONResult getHotwords(){
+        return HulincloudJSONResult.ok(videoService.getHotwords());
+    }
+
+    @PostMapping(value = "/userLike")
+    public HulincloudJSONResult userLike(String userId,String videoId, String videoCreateId) throws Exception {
+        videoService.userLikeVideo(userId, videoId, videoCreateId);
+        return HulincloudJSONResult.ok();
+    }
+
+    @PostMapping(value = "/userUnLike")
+    public HulincloudJSONResult userUnLike(String userId,String videoId, String videoCreateId) throws Exception {
+        videoService.userUnLikeVideo(userId, videoId, videoCreateId);
+        return HulincloudJSONResult.ok();
+    }
+
 }
