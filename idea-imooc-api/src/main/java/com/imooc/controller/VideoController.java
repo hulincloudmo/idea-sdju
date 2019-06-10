@@ -46,7 +46,7 @@ public class VideoController extends BasicController {
                     dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "bgmId", value = "背景音乐id", required = false,
                     dataType = "String", paramType = "form"),
-            @ApiImplicitParam(name = "videoSeconds", value = "背景音乐播放长度", required = true,
+            @ApiImplicitParam(name = "videoSeconds", value = "背景音乐播放长度", required = false,
                     dataType = "String", paramType = "form"),
             @ApiImplicitParam(name = "videoWidth", value = "视频宽度", required = true,
                     dataType = "String", paramType = "form"),
@@ -60,7 +60,7 @@ public class VideoController extends BasicController {
                                        String bgmId, double videoSeconds,
                                        int videoWidth, int videoHeight,
                                        String desc,
-                                       @ApiParam(value = "短视频", required = true)
+                                       @ApiParam(value = "file", required = true)
                                                MultipartFile file) throws Exception {
 
         if (StringUtils.isBlank(userId)) {

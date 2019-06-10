@@ -84,6 +84,7 @@ public class RegisterController extends BasicController {
 				MD5Utils.getMD5Str(user.getPassword()));
 
 		// 3. 返回
+
 		if (userResult != null) {
 			userResult.setPassword("");
 			UsersVO userVO = setUserRedisSessionToken(userResult);
