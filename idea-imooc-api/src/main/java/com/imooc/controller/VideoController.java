@@ -13,8 +13,12 @@ import enums.VideoStatusEnum;
 import io.swagger.annotations.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -140,14 +144,16 @@ public class VideoController extends BasicController {
 
         //保存数据库
         Videos video = new Videos();
-        video.setAudioId(bgmId);
+        Sid sid = new Sid();
+        String audioId = sid.nextShort();
+        video.setAudioId(audioId);
         video.setUserId(userId);
         video.setVideoSeconds((float) videoSeconds);
         video.setVideoWidth(videoWidth);
         video.setVideoHeight(videoHeight);
         video.setVideoDesc(desc);
         video.setCoverPath(coverPathDB);
-        video.setVideoPath(finalVideoPath);
+        video.setVideoPath(uploadPathDB);
         video.setStatus(VideoStatusEnum.SUCCESS.value);
         video.setCreateTime(new Date());
         String videoId = videoService.saveVideo(video);
@@ -161,14 +167,15 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok(bgm);
     }
 
-    @PostMapping("/showAll")
-    public HulincloudJSONResult showAll(@RequestBody Videos video,Integer SaveRecord , Integer page) {
+    @GetMapping(value = "/showAll")
+    public HulincloudJSONResult showAll(Integer page){
 
-        if (page == null) {
+        if (page == null){
             page = 1;
         }
 
-        PagedResult result = videoService.getAllVideos(video, SaveRecord, page, PAGE_SIZE);
+        PagedResult result = videoService.getAllVideos(page, PAGE_SIZE);
+
         return HulincloudJSONResult.ok(result);
     }
 
@@ -232,25 +239,8 @@ public class VideoController extends BasicController {
             }
         }
 
-        videoService.updateVideo(videoId, uploadPathDB);
 
-        return HulincloudJSONResult.ok();
-    }
 
-    @PostMapping(value = "/hot")
-    public HulincloudJSONResult getHotwords(){
-        return HulincloudJSONResult.ok(videoService.getHotwords());
-    }
-
-    @PostMapping(value = "/userLike")
-    public HulincloudJSONResult userLike(String userId,String videoId, String videoCreateId) throws Exception {
-        videoService.userLikeVideo(userId, videoId, videoCreateId);
-        return HulincloudJSONResult.ok();
-    }
-
-    @PostMapping(value = "/userUnLike")
-    public HulincloudJSONResult userUnLike(String userId,String videoId, String videoCreateId) throws Exception {
-        videoService.userUnLikeVideo(userId, videoId, videoCreateId);
         return HulincloudJSONResult.ok();
     }
 

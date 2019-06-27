@@ -2,8 +2,6 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.imooc.pojo.SearchRecords;
-import com.imooc.pojo.UsersLikeVideos;
 import com.imooc.pojo.Videos;
 import com.imooc.pojo.vo.VideosVO;
 import com.imooc.service.VideoService;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -48,34 +45,7 @@ public class VideoServiceImpl implements VideoService {
     @Autowired
     private Sid sid;
 
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    @Override
-    public PagedResult getAllVideos(Videos video,Integer SaveRecord , Integer page, Integer pageSize) {
 
-        String desc = video.getVideoDesc();
-
-        if (SaveRecord != null && SaveRecord == 1){
-            SearchRecords record = new SearchRecords();
-            String recordid = sid.nextShort();
-            record.setId(recordid);
-            record.setContent(desc);
-            searchRecordsMapper.insert(record);
-        }
-
-        PageHelper.startPage(page,pageSize);
-
-        List<VideosVO> list = videosMapperCustom.queryAllVideos(desc);
-
-        PageInfo<VideosVO> pageList = new PageInfo<>(list);
-
-        PagedResult pagedResult = new PagedResult();
-        pagedResult.setPage(page);
-        pagedResult.setTotal(pageList.getPages());
-        pagedResult.setRows(list);
-        pagedResult.setRecords(pageList.getTotal());
-
-        return pagedResult;
-    }
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
     public String saveVideo(Videos videos) {
@@ -88,50 +58,21 @@ public class VideoServiceImpl implements VideoService {
 
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     @Override
-    public void updateVideo(String videoId, String coverPath) {
-        Videos video = new Videos();
-        video.setId(videoId);
-        video.setCoverPath(coverPath);
-        videosMapper.updateByPrimaryKeySelective(video);
+    public PagedResult getAllVideos(Integer page, Integer pageSize) {
+        PageHelper.startPage(page,pageSize);
+
+        List<VideosVO> list = videosMapperCustom.queryAllVideo();
+
+
+        PageInfo<VideosVO> pageList = new PageInfo<>(list);
+
+        PagedResult pagedResult = new PagedResult();
+        pagedResult.setPage(page);
+        pagedResult.setRecords(pageList.getTotal());
+        pagedResult.setTotal(pageList.getPages());
+        pagedResult.setRows(list);
+
+        return pagedResult;
     }
 
-    @Transactional(propagation = Propagation.SUPPORTS)
-    @Override
-    public List<String> getHotwords() {
-        return searchRecordsMapper.getHotwords();
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public void userLikeVideo(String userId, String videoId, String videoCreaterId) {
-
-        //保存用户喜欢表
-        String likeId = sid.nextShort();
-        UsersLikeVideos ulv = new UsersLikeVideos();
-        ulv.setId(likeId);
-        ulv.setUserId(userId);
-        ulv.setVideoId(videoId);
-        usersLikeVideosMapper.insert(ulv);
-
-        videosMapperCustom.addVideoLikeCount(videoId);
-
-        myUsersMapper.addReceiveLikeCount(userId);
-    }
-
-    @Transactional(propagation = Propagation.REQUIRED)
-    @Override
-    public void userUnLikeVideo(String userId, String videoId, String videoCreaterId) {
-
-        //删除用户喜欢表
-        Example example = new Example(UsersLikeVideos.class);
-        Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("userId", userId);
-        criteria.andEqualTo("videoId", videoId);
-        usersLikeVideosMapper.deleteByExample(example);
-
-
-        videosMapperCustom.reduceVideoLikeCount(videoId);
-
-        myUsersMapper.reduceReceiveLikeCount(userId);
-    }
 }

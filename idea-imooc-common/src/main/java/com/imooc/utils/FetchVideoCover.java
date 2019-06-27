@@ -32,9 +32,7 @@ public class FetchVideoCover {
 		
 		command.add(coverOutputPath);
 		
-		for (String c : command) {
-			System.out.print(c + " ");
-		}
+		
 		
 		ProcessBuilder builder = new ProcessBuilder(command);
 		Process process = builder.start();

@@ -1,8 +1,10 @@
 package com.imooc.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.imooc.pojo.Bgm;
-import com.imooc.pojo.Videos;
 import com.imooc.service.BgmService;
+import com.imooc.utils.PagedResult;
 import mapper.BgmMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,8 +32,27 @@ public class BgmServiceImpl implements BgmService {
 
     @Transactional(propagation = Propagation.SUPPORTS)
     @Override
-    public List<Bgm> queryBgmList() {
-        return bgmMapper.selectAll();
+    public PagedResult queryBgmList(Integer page, Integer PAGE_SIZE) {
+
+        PageHelper.startPage(page,PAGE_SIZE);
+
+        List<Bgm> bgmList = bgmMapper.selectAll();
+
+
+
+        PageInfo<Bgm> pageList = new PageInfo<>(bgmList);
+
+
+        PagedResult pagedResult = new PagedResult();
+        pagedResult.setPage(page);
+        pagedResult.setRecords(pageList.getTotal());
+        pagedResult.setRows(bgmList);
+        pagedResult.setTotal(pageList.getPages());
+
+
+
+        return pagedResult;
+
     }
 
     @Transactional(propagation = Propagation.SUPPORTS)

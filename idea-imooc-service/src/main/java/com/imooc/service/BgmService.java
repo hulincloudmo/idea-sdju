@@ -1,8 +1,7 @@
 package com.imooc.service;
 
 import com.imooc.pojo.Bgm;
-
-import java.util.List;
+import com.imooc.utils.PagedResult;
 
 /**
  * @author hulincloud
@@ -16,7 +15,7 @@ public interface BgmService {
      * @author hulincloud
      * @date 2019/5/17 11:00
      */
-    public List<Bgm> queryBgmList();
+    public PagedResult queryBgmList(Integer page, Integer PAGE_SIZE);
     /***
      *
      *

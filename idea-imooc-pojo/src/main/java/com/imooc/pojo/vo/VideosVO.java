@@ -1,7 +1,6 @@
 package com.imooc.pojo.vo;
 
 import java.util.Date;
-import javax.persistence.*;
 
 public class VideosVO {
     private String id;
