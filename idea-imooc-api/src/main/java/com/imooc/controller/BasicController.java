@@ -27,5 +27,5 @@ public class BasicController {
 	 */
 	public static final String FILE_SPACE = "D:\\SDJU_research_userData";
 
-	public static final Integer PAGE_SIZE  = 2;
+	public static final Integer PAGE_SIZE  = 4;
 }

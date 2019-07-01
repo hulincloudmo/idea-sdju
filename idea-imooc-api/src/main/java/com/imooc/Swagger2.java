@@ -48,12 +48,12 @@ public class Swagger2 {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 设置页面标题
-                .title("Sdju科研管理系统后端api接口文档")
+                .title("小视频后端api接口文档")
                 // 设置联系人
                 .contact(new Contact("hulincloud", "https://www.api.hangmomo.cn/doc.html", "305562638@qq.com"))
                 // 描述
-                .description("欢迎访问Sdju科研管理系统接口文档")
+                .description("小视频接口文档")
                 // 定义版本号
-                .version("0.1").build();
+                .version("0.3").build();
     }
 }
