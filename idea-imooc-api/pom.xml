@@ -9,9 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+<!--    war-->
+    <packaging>
+        war
+    </packaging>
+
+
     <name>SDJU科研管理系统后端API实现层</name>
     <artifactId>idea-imooc-api</artifactId>
     <dependencies>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+           <scope>provided</scope>
+        </dependency>
+        
         <dependency>
             <groupId>com.imooc.idea</groupId>
             <artifactId>idea-imooc-service</artifactId>

@@ -7,12 +7,16 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="idea-imooc-service" />
-        <module name="idea-imooc-pojo" />
         <module name="idea-imooc-api" />
+        <module name="idea-imooc-pojo" />
         <module name="idea-imooc-mapper" />
         <module name="idea-imooc-common" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="imoocvideoadmin" target="1.8" />
+      <module name="imoocvideocommon" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -21,6 +25,8 @@
       <module name="idea-imooc-mapper" options="-parameters" />
       <module name="idea-imooc-pojo" options="-parameters" />
       <module name="idea-imooc-service" options="-parameters" />
+      <module name="imoocvideoadmin" options="" />
+      <module name="imoocvideocommon" options="-parameters" />
     </option>
   </component>
 </project>

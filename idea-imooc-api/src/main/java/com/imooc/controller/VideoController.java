@@ -15,10 +15,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -31,6 +28,7 @@ import java.util.UUID;
  * @author hulincloud
  */
 @RestController
+
 @Api(value = "视频相关接口", tags = {"视频controller"})
 @RequestMapping("/video")
 public class VideoController extends BasicController {
@@ -60,6 +58,7 @@ public class VideoController extends BasicController {
                     dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/upload", headers = "content-type=multipart/form-data")
+
     public HulincloudJSONResult upload(String userId,
                                        String bgmId, double videoSeconds,
                                        int videoWidth, int videoHeight,
@@ -160,6 +159,7 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok(videoId);
     }
 
+
     @ApiOperation(value = "使用BgmId查询BGM状态", notes = "查询BGM的接口")
     @GetMapping("/queryByBgmId")
     public HulincloudJSONResult test(String bgmid) {
@@ -177,6 +177,11 @@ public class VideoController extends BasicController {
         PagedResult result = videoService.getAllVideos(page, PAGE_SIZE);
 
         return HulincloudJSONResult.ok(result);
+    }
+
+    @GetMapping(value = "/searchAll")
+    public HulincloudJSONResult searchAll(@RequestBody Videos video, Integer isSaveRecord, Integer page){
+        return HulincloudJSONResult.ok();
     }
 
     @ApiOperation(value = "上传封面", notes = "上传封面的接口")
@@ -244,4 +249,32 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok();
     }
 
+    @ApiOperation(value = "用户喜欢视频",notes = "用户喜欢")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户id", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "videoId",value = "视频id", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "videoCreaterId",value = "创建者id", required = true, dataType = "String", paramType = "form")
+    })
+    @PostMapping(value = "/userLike")
+    public HulincloudJSONResult userLike( String userId, String videoId, String videoCreaterId ) throws Exception{
+
+        videoService.userLikeVideo(userId,videoId,videoCreaterId);
+        return HulincloudJSONResult.ok();
+
+    }
+
+
+    @ApiOperation(value = "用户不喜欢视频",notes = "用户不喜欢")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户id", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "videoId",value = "视频id", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "videoCreaterId",value = "创建者id", required = true, dataType = "String", paramType = "form")
+    })
+    @PostMapping(value = "/userUnLike")
+    public HulincloudJSONResult userUnLike( String userId, String videoId, String videoCreaterId ) throws Exception{
+
+        videoService.userUnLikeVideo(userId,videoId,videoCreaterId);
+        return HulincloudJSONResult.ok();
+
+    }
 }

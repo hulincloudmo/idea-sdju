@@ -4,7 +4,10 @@ import com.imooc.pojo.MyUsers;
 import com.imooc.pojo.vo.UsersVO;
 import com.imooc.service.UserService;
 import com.imooc.utils.HulincloudJSONResult;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -38,16 +41,16 @@ public class UserController extends BasicController {
 	})
 
 	@PostMapping(value = "/uploadFace")
-	public HulincloudJSONResult uploadFace(String userId,
+	public HulincloudJSONResult uploadFace(@RequestParam(value = "userId",required = true) String userId,
 										   @RequestParam(value = "file", required = true) MultipartFile[] files) throws Exception {
 
-		if (StringUtils.isBlank(userId)) {
+		if (StringUtils.isBlank(userId) || userId.equals("undefined")) {
 			return HulincloudJSONResult.errorMsg("用户id不能为空...");
 		}
 		// 文件保存的命名空间
 		String fileSpace = "D:\\SDJU_research_userData";
 		// 保存到数据库中的相对路径
-		String uploadPathDB = "/" + userId + "/face";
+		String uploadPathDB =   "/" + userId + "/face";
 
 		FileOutputStream fileOutputStream = null;
 		InputStream inputStream = null;
@@ -86,11 +89,9 @@ public class UserController extends BasicController {
 		}
 		MyUsers user = new MyUsers();
 		user.setId(userId);
-		user.setFaceImage(uploadPathDB);
+		user.setFaceImage(SERVERURL + uploadPathDB);
 
 		userService.updateUserInfo(user);
-
-
 
 		return HulincloudJSONResult.ok(user);
 	}

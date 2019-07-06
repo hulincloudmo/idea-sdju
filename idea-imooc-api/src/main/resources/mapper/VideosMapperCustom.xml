@@ -32,4 +32,12 @@
 
   </select>
 
+  <update id="addVideoLikeCount" parameterType="string">
+    update videos set like_counts=like_counts+1 where videos.audio_id=#{videoId}
+  </update>
+
+  <update id="reduceVideoLikeCount" parameterType="string">
+    update videos set like_counts=like_counts-1 where videos.audio_id=#{videoId}
+  </update>
+
 </mapper>

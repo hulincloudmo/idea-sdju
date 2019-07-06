@@ -17,5 +17,11 @@ public interface  VideoService {
     public String saveVideo(Videos videos);
 
     public PagedResult getAllVideos(Integer page, Integer pageSize);
+
+    public PagedResult searchVideos(Videos video, Integer isSaveRecord, Integer page, Integer pageSize);
+
+    public void userLikeVideo(String userId, String videoId, String videoCreatorId);
+
+    public void userUnLikeVideo(String userId, String videoId, String videoCreatorId);
 }
 
