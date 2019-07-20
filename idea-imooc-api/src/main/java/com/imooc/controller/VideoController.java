@@ -1,6 +1,8 @@
 package com.imooc.controller;
 
 import com.imooc.pojo.Bgm;
+import com.imooc.pojo.Comments;
+import com.imooc.pojo.UsersReport;
 import com.imooc.pojo.Videos;
 import com.imooc.service.BgmService;
 import com.imooc.service.UserService;
@@ -30,7 +32,7 @@ import java.util.UUID;
 @RestController
 
 @Api(value = "视频相关接口", tags = {"视频controller"})
-@RequestMapping("/video")
+@RequestMapping(value = "/video", produces = {"application/json; charset=UTF-8"})
 public class VideoController extends BasicController {
 
     @Autowired
@@ -179,9 +181,21 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok(result);
     }
 
-    @GetMapping(value = "/searchAll")
+    @PostMapping(value = "/searchAll")
     public HulincloudJSONResult searchAll(@RequestBody Videos video, Integer isSaveRecord, Integer page){
-        return HulincloudJSONResult.ok();
+
+        if (page == null){
+            page = 1;
+        }
+
+        PagedResult result = videoService.searchVideos(video, isSaveRecord, page, PAGE_SIZE);
+
+        return HulincloudJSONResult.ok(result);
+    }
+
+    @PostMapping(value = "/hot")
+    public HulincloudJSONResult hot(){
+        return HulincloudJSONResult.ok(videoService.getHotWord());
     }
 
     @ApiOperation(value = "上传封面", notes = "上传封面的接口")
@@ -277,4 +291,32 @@ public class VideoController extends BasicController {
         return HulincloudJSONResult.ok();
 
     }
+
+    @PostMapping(value = "/saveComment")
+    public HulincloudJSONResult saveComment(@RequestBody Comments comment) throws Exception {
+
+        System.out.println(comment.getComment());
+        videoService.saveComment(comment);
+        return HulincloudJSONResult.ok("评论成功");
+    }
+
+    @PostMapping(value = "/report")
+    public HulincloudJSONResult report(@RequestBody UsersReport usersReport) throws Exception {
+
+        videoService.report(usersReport);
+        return HulincloudJSONResult.ok("举报已提交，请等待管理员审核，有你更加美好！");
+    }
+
+    @PostMapping(value = "/getComment")
+    public HulincloudJSONResult getComment(String videoId, Integer page){
+
+        if (StringUtils.isBlank(videoId)){
+            return HulincloudJSONResult.errorMsg("视频Id不能为空");
+        }
+
+        PagedResult result = videoService.getAllComments(videoId,page, PAGE_SIZE);
+
+        return HulincloudJSONResult.ok(result);
+    }
+
 }

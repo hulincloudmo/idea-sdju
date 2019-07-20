@@ -25,6 +25,7 @@ public class UsersVO {
     /**
      * 我的头像，如果没有默认给一张
      */
+//    @JsonProperty("face_image")
     private String faceImage;
 
     /**

@@ -7,8 +7,8 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="idea-imooc-service" />
-        <module name="idea-imooc-api" />
         <module name="idea-imooc-pojo" />
+        <module name="idea-imooc-api" />
         <module name="idea-imooc-mapper" />
         <module name="idea-imooc-common" />
       </profile>

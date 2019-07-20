@@ -2,12 +2,12 @@ package com.imooc.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.imooc.pojo.SearchRecords;
-import com.imooc.pojo.UsersLikeVideos;
-import com.imooc.pojo.Videos;
+import com.imooc.pojo.*;
+import com.imooc.pojo.vo.CommentsVO;
 import com.imooc.pojo.vo.VideosVO;
 import com.imooc.service.VideoService;
 import com.imooc.utils.PagedResult;
+import com.imooc.utils.TimeAgoUtils;
 import mapper.*;
 import org.n3r.idworker.Sid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -46,7 +47,16 @@ public class VideoServiceImpl implements VideoService {
     private UsersLikeVideosMapper usersLikeVideosMapper;
 
     @Autowired
+    private UsersReportMapper usersReportMapper;
+
+    @Autowired
     private Sid sid;
+
+    @Autowired
+    private CommentsMapper commentsMapper;
+
+    @Autowired
+    private  CommentsMapperCustom commentsMapperCustom;
 
 
 
@@ -93,10 +103,24 @@ public class VideoServiceImpl implements VideoService {
 
             searchRecordsMapper.insert(record);
         }
+            PageHelper.startPage(page, pageSize);
+            List<VideosVO> list = videosMapperCustom.searchAllVideo(desc);
+            PageInfo<VideosVO> pageList = new PageInfo<>(list);
 
             PagedResult pagedResult = new PagedResult();
+            pagedResult.setPage(page);
+            pagedResult.setRecords(pageList.getTotal());
+            pagedResult.setTotal(pageList.getPages());
+            pagedResult.setRows(list);
 
         return pagedResult;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS, rollbackFor = Exception.class)
+    @Override
+    public List<String> getHotWord() {
+
+        return searchRecordsMapper.getHotWords();
     }
 
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
@@ -137,4 +161,48 @@ public class VideoServiceImpl implements VideoService {
 
 
     }
+
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+    @Override
+    public void saveComment(Comments comments) {
+        String commentId = sid.nextShort();
+        comments.setId(commentId);
+        comments.setCreateTime(new Date());
+        commentsMapper.insert(comments);
+    }
+
+    @Override
+    public void report(UsersReport usersReport) {
+        String reportId = sid.nextShort();
+        usersReport.setId(reportId);
+        usersReport.setCreateDate(new Date());
+        usersReportMapper.insert(usersReport);
+    }
+
+    @Override
+    public PagedResult getAllComments(String videoId, Integer page, Integer pageSize) {
+
+
+
+        PageHelper.startPage(page, pageSize);
+
+        List<CommentsVO> list = commentsMapperCustom.queryComments(videoId);
+
+        for (CommentsVO commentsVO : list){
+            String timeAgo = TimeAgoUtils.format(commentsVO.getCreateTime());
+            commentsVO.setTimeAgoStr(timeAgo);
+        }
+
+        PageInfo<CommentsVO> pageList = new PageInfo<>(list);
+
+        PagedResult result = new PagedResult();
+        result.setPage(page);
+        result.setRecords(pageList.getTotal());
+        result.setRows(list);
+        result.setTotal(pageList.getPages());
+
+        return result;
+    }
+
+
 }

@@ -76,12 +76,12 @@ public class RegisterController extends BasicController {
 
 		// 1. 判断用户名和密码必须不为空
 		if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
-			return HulincloudJSONResult.ok("用户名或密码不能为空...");
+			return HulincloudJSONResult.errorMsg("用户名或密码不能为空...");
 		}
 
 		// 2. 判断用户是否存在
 		MyUsers userResult = userService.queryUserForLogin(username,
-				MD5Utils.getMD5Str(user.getPassword()));
+				MD5Utils.getMD5Str(password));
 
 		// 3. 返回
 
@@ -96,7 +96,7 @@ public class RegisterController extends BasicController {
 
 	public UsersVO setUserRedisSessionToken(MyUsers userModel) {
 		String uniqueToken = UUID.randomUUID().toString();
-		redis.set(USER_REDIS_SESSION + ":"+userModel.getId(), uniqueToken,1000*60*30);
+		redis.set(USER_REDIS_SESSION + ":"+userModel.getId(), uniqueToken,USERKEEPALIVE);
 
 		UsersVO usersVO = new UsersVO();
 		BeanUtils.copyProperties(userModel, usersVO);

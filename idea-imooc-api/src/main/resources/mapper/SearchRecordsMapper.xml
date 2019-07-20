@@ -9,7 +9,7 @@
     <result column="content" property="content" jdbcType="VARCHAR" />
   </resultMap>
 
-  <select id="getHotwords" resultType="String">
+  <select id="getHotWords" resultType="String">
     SELECT content from search_records GROUP BY content ORDER BY COUNT(content) desc
   </select>
 

@@ -32,6 +32,7 @@ public class MyUsers {
      */
     @ApiModelProperty(hidden = true)
     @Column(name = "face_image")
+
     private String faceImage;
 
     /**

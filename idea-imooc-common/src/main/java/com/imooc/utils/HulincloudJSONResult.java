@@ -63,17 +63,17 @@ public class HulincloudJSONResult {
         return new HulincloudJSONResult(555, msg, null);
     }
 
-    public HulincloudJSONResult() {
+    private HulincloudJSONResult() {
 
     }
 
-    public HulincloudJSONResult(Integer status, String msg, Object data) {
+    private HulincloudJSONResult(Integer status, String msg, Object data) {
         this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public HulincloudJSONResult(Object data) {
+    private HulincloudJSONResult(Object data) {
         this.status = 200;
         this.msg = "OK";
         this.data = data;

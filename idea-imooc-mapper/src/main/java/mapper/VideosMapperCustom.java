@@ -3,6 +3,7 @@ package mapper;
 import com.imooc.pojo.Videos;
 import com.imooc.pojo.vo.VideosVO;
 import com.imooc.utils.MyMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,6 +18,8 @@ import java.util.List;
 public interface VideosMapperCustom extends MyMapper<Videos> {
 
  public List<VideosVO> queryAllVideo();
+
+ public List<VideosVO> searchAllVideo(@Param("videoDesc") String videoDesc);
 
  public void addVideoLikeCount(String videoId);
 

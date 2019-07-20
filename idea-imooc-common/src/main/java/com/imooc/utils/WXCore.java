@@ -44,10 +44,10 @@ public class WXCore {
 
 
     public static void main(String[] args) throws Exception{
-        String appId = "wxbbc5d7b8d7205814";
-        String encryptedData = "nqJ8VJcusmzqgttgmg7m1wPGmXGc5IpntOP7J5a543GpdbRBarJ9HsPG+43JAeQgbDnCCvCxHKxNKd/06E2OY3tKCu/EKEd+XLg4T0PzTt6p3oWXVqf1c24RFFEJiTftZJWfBooh5434KJV4bspDRx/Acz5IKO7XQ5NDmcINIBZ9Gj8qnV2yl0KIugENdXDDkarfcxq++MmMrJWX+mmnFOW/wh5k3c6I2S8pXXXgdNiAM1xYQlBgBL6/cRNbjoqYhTkzDgZXIOC3XdzOEVOft3RCi+C/T8jBYAySP+KC1Xm1KKM5fSVXPQEEtfD3yL1JuWNN1hqE60qXFvWqvkZ/RKiXeqRh3g/mcPMnQ6rYXG45R1ZobGgIi0R8IArCb5UhRYw0HsJy2IB+f3msrsM+YYqM1z7zP+XS2ZzIwErCP7/HxDrSghDGdlgPRH+W1N02wa4DMvbSpa2/DXDtBZ2XH4YPLk5CFVoRMWLv6oyWZeiGwRMO+10cj49dmxFk2ofPVyN6QRH/cfzPRvx8O61m3ug7akVGrTmR8SYHNPbjwGc=";
-        String sessionKey = "8xVyTSH62z6AcJZbetvEIg==";
-        String iv = "Ii6UY+Pk7M6i5aQloGva+A==";
+        String appId = "wxcb11a98d2ba83be8";
+        String encryptedData = "lQhNZ4v4b5iPDKtug4UlZXqzFClOKJLCqIB/DYZSble8/+1ZGYFz/Sew2aucTv646+0eNBZCa1IsetxoNURzdV35RMLqXDCYj9qdFubf18tkdrdptyfMEtI7MayQVkDEz4mmGikOa8u3kMMXR5hOnclQFs5+G7u/RFUwkQzlVelhFb+IUqTeDrIqfz0XA5ILeeFzc0jTnDwWhQmJzLSgH/YTIHG9n13OmCFXAhQO6M1BxSFKdr1dVHy/ykWlCs7Z8uEOUaxo+XalursA+Ex/moO7LwBcmGqb3xmaN/lhj4SOi8weuq00YiwvG4Y/eYvx1aGurOEueaFWOSIMuccdyd9fmKmK87oSwQ0v+C4M6xhsBUl2M8FdI3leFP9fq0Ecy3hl9GppqN6D5icEg3EUqWpJ+OgTZKXM1LZtjd1OtoFaQc/cOi6Wjnq5iezlxEcp2MvhQFGavEpOJh3ttE3UcUP5y/4S9TvLed9QTtETMhlD2oxmIj+ojXC8ZCZ2SbAQt/X24yaZSaQTnN/Xw1wdwH/hgbfPFDnGDA1/JYMdp/A=";
+        String sessionKey = "7mEsAa79WzvhHCruQ4TUaA==";
+        String iv = "FdsNKTxoWqLOukAju6LrFA==";
         System.out.println(decrypt(appId, encryptedData, sessionKey, iv));
     }
 

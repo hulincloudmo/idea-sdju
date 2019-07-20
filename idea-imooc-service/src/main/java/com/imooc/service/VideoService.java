@@ -1,7 +1,11 @@
 package com.imooc.service;
 
+import com.imooc.pojo.Comments;
+import com.imooc.pojo.UsersReport;
 import com.imooc.pojo.Videos;
 import com.imooc.utils.PagedResult;
+
+import java.util.List;
 
 /**
  * @ProjectName: idea-imooc
@@ -20,8 +24,17 @@ public interface  VideoService {
 
     public PagedResult searchVideos(Videos video, Integer isSaveRecord, Integer page, Integer pageSize);
 
+    public List<String> getHotWord();
+
     public void userLikeVideo(String userId, String videoId, String videoCreatorId);
 
     public void userUnLikeVideo(String userId, String videoId, String videoCreatorId);
+
+    public void saveComment(Comments comments);
+
+    public void report(UsersReport usersReport);
+
+    public PagedResult getAllComments(String videoId, Integer page,Integer pageSize);
+
 }
 

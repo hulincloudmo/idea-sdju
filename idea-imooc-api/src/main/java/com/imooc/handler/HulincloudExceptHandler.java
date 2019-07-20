@@ -1,10 +1,6 @@
 package com.imooc.handler;
 
-import com.imooc.utils.HulincloudJSONResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ProjectName: idea-imooc
@@ -20,10 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 public class HulincloudExceptHandler{
 
 
-    @ExceptionHandler(value = Exception.class)
-    public HulincloudJSONResult defaultErrorHandler(HttpServletRequest request,Exception e) throws Exception {
-//        e.printStackTrace();
-        return HulincloudJSONResult.errorException("服务器错误，请联系后端开发人员");
-    }
+//    @ExceptionHandler(value = Exception.class)
+//    public HulincloudJSONResult defaultErrorHandler(HttpServletRequest request,Exception e) throws Exception {
+////        e.printStackTrace();
+//        return HulincloudJSONResult.errorException("服务器错误，请联系后端开发人员");
+//    }
 
 }

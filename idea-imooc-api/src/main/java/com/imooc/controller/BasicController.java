@@ -32,4 +32,6 @@ public class BasicController {
 	public static final String FILE_SPACE = "D:\\SDJU_research_userData";
 
 	public static final Integer PAGE_SIZE  = 4;
+
+	public static final Integer USERKEEPALIVE = 1000*60*30;
 }
